@@ -1,7 +1,7 @@
-# cloudmersive_spam_api_client
-Easily and directly scan and block spam security threats in input.
+# cloudmersive_cdr_api_client
+Use the Content Disarm and Reconstruction API to remove security risks from documents by tearing them down, removing unsafe content and rebuilding them.
 
-[Cloudmersive Barcode API](https://cloudmersive.com/spam-detection-api) provides advanced spam detection capabilities.
+[Cloudmersive CDR API](https://cloudmersive.com/cdr-api) provides advanced document sanitization CDR capabilities.
 
 - API version: v1
 - Package version: 3.0.0
@@ -21,11 +21,11 @@ To install the bindings via [Composer](http://getcomposer.org/), add the followi
   "repositories": [
     {
       "type": "git",
-      "url": "https://github.com/cloudmersive/cloudmersive_spam_api_client.git"
+      "url": "https://github.com/cloudmersive/cloudmersive_cdr_api_client.git"
     }
   ],
   "require": {
-    "cloudmersive/cloudmersive_spam_api_client": "*@dev"
+    "cloudmersive/cloudmersive_cdr_api_client": "*@dev"
   }
 }
 ```
@@ -37,7 +37,7 @@ Then run `composer install`
 Download the files and include `autoload.php`:
 
 ```php
-    require_once('/path/to/cloudmersive_spam_api_client/vendor/autoload.php');
+    require_once('/path/to/cloudmersive_cdr_api_client/vendor/autoload.php');
 ```
 
 ## Tests
@@ -62,19 +62,18 @@ $config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKey('Ap
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 // $config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Apikey', 'Bearer');
 
-$apiInstance = new Swagger\Client\Api\SpamDetectionApi(
+$apiInstance = new Swagger\Client\Api\FileSanitizationApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$body = new \Swagger\Client\Model\SpamDetectionAdvancedRequest(); // \Swagger\Client\Model\SpamDetectionAdvancedRequest | Spam detection request
+$input_file = "/path/to/file.txt"; // \SplFileObject | Input document, or photos of a document, to extract data from
 
 try {
-    $result = $apiInstance->spamDetectTextStringAdvancedPost($body);
-    print_r($result);
+    $apiInstance->file($input_file);
 } catch (Exception $e) {
-    echo 'Exception when calling SpamDetectionApi->spamDetectTextStringAdvancedPost: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling FileSanitizationApi->file: ', $e->getMessage(), PHP_EOL;
 }
 
 ?>
@@ -82,20 +81,16 @@ try {
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://localhost*
+All URIs are relative to *https://api.cloudmersive.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*SpamDetectionApi* | [**spamDetectTextStringAdvancedPost**](docs/Api/SpamDetectionApi.md#spamdetecttextstringadvancedpost) | **POST** /spam/detect/text-string/advanced | Perform advanced AI spam detection and classification against input text string.  Analyzes input content as well as embedded URLs with AI deep learnign to detect spam, phishing and other unsafe content.  Uses 25-100 API calls depending on model selected.
-*SpamDetectionApi* | [**spamDetectTextStringPost**](docs/Api/SpamDetectionApi.md#spamdetecttextstringpost) | **POST** /spam/detect/text-string | Perform AI spam detection and classification against input text string.  Analyzes input content as well as embedded URLs with AI deep learnign to detect spam, phishing and other unsafe content.  Uses 25-75 API calls depending on model selected.
+*FileSanitizationApi* | [**file**](docs/Api/FileSanitizationApi.md#file) | **POST** /cdr/sanitization/file | Complete Content Disarm and Reconstruction on an Input File, and output in same file format
+*FileSanitizationApi* | [**fileToPdf**](docs/Api/FileSanitizationApi.md#filetopdf) | **POST** /cdr/sanitization/file/to/pdf | Complete Content Disarm and Reconstruction on an Input File with PDF/A Output
 
 
 ## Documentation For Models
 
- - [SpamDetectionAdvancedRequest](docs/Model/SpamDetectionAdvancedRequest.md)
- - [SpamDetectionAdvancedResponse](docs/Model/SpamDetectionAdvancedResponse.md)
- - [SpamDetectionRequest](docs/Model/SpamDetectionRequest.md)
- - [SpamDetectionResponse](docs/Model/SpamDetectionResponse.md)
 
 
 ## Documentation For Authorization
