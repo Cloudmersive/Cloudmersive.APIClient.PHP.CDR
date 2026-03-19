@@ -4,7 +4,7 @@ Use the Content Disarm and Reconstruction API to remove security risks from docu
 [Cloudmersive CDR API](https://cloudmersive.com/cdr-api) provides advanced document sanitization CDR capabilities.
 
 - API version: v1
-- Package version: 3.0.0
+- Package version: 3.0.1
 
 
 ## Requirements
@@ -71,7 +71,8 @@ $apiInstance = new Swagger\Client\Api\FileSanitizationApi(
 $input_file = "/path/to/file.txt"; // \SplFileObject | Input document, or photos of a document, to extract data from
 
 try {
-    $apiInstance->file($input_file);
+    $result = $apiInstance->file($input_file);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling FileSanitizationApi->file: ', $e->getMessage(), PHP_EOL;
 }
@@ -85,12 +86,15 @@ All URIs are relative to *https://api.cloudmersive.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*FileSanitizationApi* | [**file**](docs/Api/FileSanitizationApi.md#file) | **POST** /cdr/sanitization/file | Complete Content Disarm and Reconstruction on an Input File, and output in same file format
-*FileSanitizationApi* | [**fileToPdf**](docs/Api/FileSanitizationApi.md#filetopdf) | **POST** /cdr/sanitization/file/to/pdf | Complete Content Disarm and Reconstruction on an Input File with PDF/A Output
+*FileSanitizationApi* | [**file**](docs/Api/FileSanitizationApi.md#file) | **POST** /cdr/sanitization/file | Content Disarm and Reconstruction on a File
+*FileSanitizationApi* | [**fileAdvanced**](docs/Api/FileSanitizationApi.md#fileadvanced) | **POST** /cdr/sanitization/file/advanced | Advanced Content Disarm and Reconstruction on a File
+*FileSanitizationApi* | [**fileToPdf**](docs/Api/FileSanitizationApi.md#filetopdf) | **POST** /cdr/sanitization/file/to/pdf | Content Disarm and Reconstruction on a File with PDFA Output
+*FileSanitizationApi* | [**fileToPdfAdvanced**](docs/Api/FileSanitizationApi.md#filetopdfadvanced) | **POST** /cdr/sanitization/file/to/pdf/advanced | Advanced Content Disarm and Reconstruction on a File with PDFA Output
 
 
 ## Documentation For Models
 
+ - [ProblemDetails](docs/Model/ProblemDetails.md)
 
 
 ## Documentation For Authorization
